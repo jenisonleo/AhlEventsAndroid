@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 import com.annahockeyleague.comcom.ComComApplication;
 import com.annahockeyleague.comcom.login.viewmodel.LoginHandler;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import java.io.IOException;
@@ -48,8 +49,12 @@ public class ListingViewModel extends ViewModel {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String s=new String(response.body().bytes());
-                Log.e("jenison"," "+s);JsonArray parser=new JsonParser().parse(s).getAsJsonArray();
-                listingInterface.onEventsLoaded(parser);
+                Log.e("events", " " + s);
+                JsonElement parse = new JsonParser().parse(s);
+                if(parse.isJsonArray()) {
+                    JsonArray parser =parse.getAsJsonArray();
+                    listingInterface.onEventsLoaded(parser);
+                }
             }
         });
     }
@@ -67,8 +72,11 @@ public class ListingViewModel extends ViewModel {
             public void onResponse(Call call, Response response) throws IOException {
                 String s=new String(response.body().bytes());
                 Log.e("jenison1"," "+s);
-                JsonArray parser=new JsonParser().parse(s).getAsJsonArray();
-                listingInterface.onInfoloaded(parser);
+                JsonElement parse = new JsonParser().parse(s);
+                if(parse.isJsonArray()) {
+                    JsonArray parser = parse.getAsJsonArray();
+                    listingInterface.onInfoloaded(parser);
+                }
             }
         });
     }
