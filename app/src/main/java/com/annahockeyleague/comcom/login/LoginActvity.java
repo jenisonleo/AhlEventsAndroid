@@ -15,6 +15,7 @@ public class LoginActvity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         if(((ComComApplication)getApplication()).getLoginHandler().isUserLoggedIn()){
             launchListing();
         }else {
