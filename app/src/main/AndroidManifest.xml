@@ -11,7 +11,9 @@
         android:name=".ComComApplication"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".login.LoginActvity">
+        <activity android:name=".login.LoginActvity"
+            android:screenOrientation="portrait"
+            android:resizeableActivity="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +23,9 @@
                 <action android:name="android.intent.action.VIEW"/>
             </intent-filter>
         </activity>
-        <activity android:name=".listing.ListingActivity" />
+        <activity android:name=".listing.ListingActivity"
+            android:screenOrientation="portrait"
+            android:resizeableActivity="false"/>
     </application>
 
 </manifest>

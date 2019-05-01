@@ -25,17 +25,17 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
     @Override
     public void onBindViewHolder(@NonNull EventsHolder holder, int position) {
         Log.e("onbind,", " ");
-        String title=data.get(position).getAsJsonObject().get("title").getAsString();
-        String description=data.get(position).getAsJsonObject().get("description").getAsString();
-        String venue=data.get(position).getAsJsonObject().get("place").getAsString();
-        String from=data.get(position).getAsJsonObject().get("fromDate").getAsString();
-        String to=data.get(position).getAsJsonObject().get("toDate").getAsString();
+        int index = (data.size() - 1) - position;
+        String title=data.get(index).getAsJsonObject().get("title").getAsString();
+        String description=data.get(index).getAsJsonObject().get("description").getAsString();
+        String venue=data.get(index).getAsJsonObject().get("place").getAsString();
+        String from=data.get(index).getAsJsonObject().get("fromDate").getAsString();
+        String to=data.get(index).getAsJsonObject().get("toDate").getAsString();
 
         holder.titleContainer.setText(title);
         holder.description_container.setText(description);
         holder.venue_container.setText(venue);
-        holder.from_container.setText(from);
-        holder.to_container.setText(to);
+        holder.from_container.setText(from+ " to " +to);
     }
 
     @Override
@@ -52,7 +52,6 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
         TextView description_container;
         TextView venue_container;
         TextView from_container;
-        TextView to_container;
 
         public EventsHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,7 +59,6 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
             description_container=itemView.findViewById(R.id.description_container);
             venue_container=itemView.findViewById(R.id.venue_container);
             from_container=itemView.findViewById(R.id.from_container);
-            to_container=itemView.findViewById(R.id.to_container);
         }
     }
 }

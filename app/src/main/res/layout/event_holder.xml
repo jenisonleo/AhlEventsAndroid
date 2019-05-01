@@ -1,50 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="10dp"
-    app:cardCornerRadius="5dp">
+    android:layout_margin="8dp"
+    app:cardCornerRadius="4dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_height="wrap_content">
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
             android:id="@+id/title_container"
-            android:layout_marginBottom="5dp"/>
-        <TextView
-            android:layout_width="match_parent"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:padding="5dp"
+            android:text="Kirgaalan Magic Show"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/description_container"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
-        <TextView
-            android:layout_width="match_parent"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:layout_margin="6dp"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_container"
+            tools:text="Welcome to the great Kirigalan magic show, today you'll witness the before ever magic that is ever been showcased by any other magician in the world. Now you see me laye neenga indha maari magic lam paathu iruka matinga" />
+
+        <TextView
             android:id="@+id/venue_container"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
-        <TextView
-            android:layout_width="match_parent"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:gravity="start"
+            android:padding="5dp"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toStartOf="@id/from_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description_container"
+            tools:text="Chennai, Urpakkam" />
+
+        <TextView
             android:id="@+id/from_container"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
-        <TextView
-            android:layout_width="match_parent"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/to_container"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"/>
-    </LinearLayout>
+            android:layout_marginEnd="6dp"
+            android:gravity="start"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/venue_container"
+            app:layout_constraintTop_toBottomOf="@id/description_container"
+            tools:text="06:00pm to 10:00pm" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

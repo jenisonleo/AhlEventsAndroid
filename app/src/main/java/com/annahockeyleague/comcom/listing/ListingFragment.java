@@ -37,7 +37,7 @@ public class ListingFragment extends Fragment implements ListingInterface {
         setRetainInstance(true);
         setHasOptionsMenu(true);
         if(getContext()!=null &&getContext().getApplicationContext()!=null) {
-            ListingViewModel listingViewModel = ViewModelProviders.of(this, new ListingViewModelFactory(((ComComApplication) getContext().getApplicationContext()).getLoginHandler(),this)).get(ListingViewModel.class);
+            ViewModelProviders.of(this, new ListingViewModelFactory(((ComComApplication) getContext().getApplicationContext()).getLoginHandler(),this)).get(ListingViewModel.class);
         }
     }
 
@@ -118,6 +118,8 @@ public class ListingFragment extends Fragment implements ListingInterface {
     public void onEventsLoaded(JsonArray data) {
         getActivity().runOnUiThread(() -> {
             if (getView() != null){
+                getView().findViewById(R.id.event_recyclerview).setVisibility(View.VISIBLE);
+                getView().findViewById(R.id.event_load).setVisibility(View.GONE);
                 ((EventsAdapter)((RecyclerView) getView().findViewById(R.id.event_recyclerview)).getAdapter()).data=data;
                 ((RecyclerView) getView().findViewById(R.id.event_recyclerview)).getAdapter().notifyDataSetChanged();
             }
@@ -128,6 +130,8 @@ public class ListingFragment extends Fragment implements ListingInterface {
     public void onInfoloaded(JsonArray data) {
         getActivity().runOnUiThread(() -> {
             if (getView() != null){
+                getView().findViewById(R.id.info_recyclerview).setVisibility(View.VISIBLE);
+                getView().findViewById(R.id.info_load).setVisibility(View.GONE);
                 ((InfoAdapter)((RecyclerView) getView().findViewById(R.id.info_recyclerview)).getAdapter()).data=data;
                 ((RecyclerView) getView().findViewById(R.id.info_recyclerview)).getAdapter().notifyDataSetChanged();
             }

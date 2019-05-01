@@ -26,8 +26,9 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull InfoHolder holder, int position) {
-        String title=data.get(position).getAsJsonObject().get("title").getAsString();
-        String description=data.get(position).getAsJsonObject().get("description").getAsString();
+        int index = (data.size() - 1) - position;
+        String title=data.get(index).getAsJsonObject().get("title").getAsString();
+        String description=data.get(index).getAsJsonObject().get("description").getAsString();
         holder.titleContainer.setText(title);
         holder.description_container.setText(description);
     }
