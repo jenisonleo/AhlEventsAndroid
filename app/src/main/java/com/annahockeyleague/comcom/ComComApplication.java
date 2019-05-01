@@ -6,7 +6,7 @@ import com.annahockeyleague.comcom.login.viewmodel.LoginHandler;
 
 public class ComComApplication extends Application {
 
-    public static final String dns="http://192.168.43.170:8002";
+    public static final String dns="https://ahlcomcom.herokuapp.com";
     private LoginHandler loginHandler;
     @Override
     public void onCreate() {

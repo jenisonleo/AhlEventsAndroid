@@ -1,5 +1,6 @@
 package com.annahockeyleague.comcom.listing;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.ViewFlipper;
 
@@ -53,10 +55,16 @@ public class ListingFragment extends Fragment implements ListingInterface {
                 switch (menuItem.getItemId()){
                     case R.id.action_info:{
                         ((ViewFlipper)view.findViewById(R.id.data_flipper)).setDisplayedChild(0);
+                        Animator anim = ViewAnimationUtils.createCircularReveal(view.findViewById(R.id.data_flipper), view.findViewById(R.id.bottom_navigation).getWidth()/4, view.findViewById(R.id.data_flipper).getHeight(), 0, view.findViewById(R.id.data_flipper).getHeight());
+                        anim.setDuration(300);
+                        anim.start();
                         break;
                     }
                     case R.id.action_events:{
                         ((ViewFlipper)view.findViewById(R.id.data_flipper)).setDisplayedChild(1);
+                        Animator anim = ViewAnimationUtils.createCircularReveal(view.findViewById(R.id.data_flipper), view.findViewById(R.id.bottom_navigation).getWidth()*3/4, view.findViewById(R.id.data_flipper).getHeight(), 0, view.findViewById(R.id.data_flipper).getHeight());
+                        anim.setDuration(300);
+                        anim.start();
                         break;
                     }
                     default:
