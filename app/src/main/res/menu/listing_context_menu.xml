@@ -6,8 +6,4 @@
         android:title="Search"
         app:showAsAction="always"
         android:icon="@drawable/ic_round_search_24px"/>
-    <item android:id="@+id/logout"
-        android:title="LogOut"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_round_power_settings_new_24px"/>
 </menu>

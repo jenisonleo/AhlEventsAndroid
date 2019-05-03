@@ -66,6 +66,92 @@
                 android:visibility="gone"/>
 
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_round_account_circle_24px"
+                android:id="@+id/profile_image_container"
+                android:layout_marginTop="15dp"
+                android:scaleType="fitXY"
+                android:layout_centerHorizontal="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="jenisonleo"
+                    android:textStyle="bold"
+                    android:textSize="28sp"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/user_name_holder"
+                    android:layout_below="@+id/profile_image_container"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="jenisongracious@gmail.com"
+                    android:id="@+id/email_holder"
+                    android:textStyle="italic"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/user_name_holder"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/email_holder"
+                android:id="@+id/profile_seperator"
+                android:background="@android:color/darker_gray"/>
+            <TextView
+                android:padding="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Privacy Policy"
+                android:layout_below="@id/profile_seperator"
+                android:id="@+id/pivacy_policy"
+                android:textSize="18sp"
+                android:textStyle="italic"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/pivacy_policy"
+                android:id="@+id/privacy_seperator"
+                android:background="@android:color/darker_gray"/>
+            <TextView
+                android:padding="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="About Us"
+                android:layout_below="@id/privacy_seperator"
+                android:id="@+id/aboutus"
+                android:textSize="18sp"
+                android:textStyle="italic"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/aboutus"
+                android:id="@+id/aboutus_seperator"
+                android:background="@android:color/darker_gray"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text="Admin Console"
+                android:visibility="invisible"
+                android:layout_below="@id/aboutus_seperator"
+                android:id="@+id/admin_console"/>
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Sign Out"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="25dp"
+                android:id="@+id/sign_out"/>
+        </RelativeLayout>
     </ViewFlipper>
 
 

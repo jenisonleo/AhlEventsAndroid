@@ -37,7 +37,7 @@ public class LoginFragment extends Fragment implements LoginInterface {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        LoginViewModel loginViewModel = ViewModelProviders.of(this,new LoginViewModelFactory(this)).get(LoginViewModel.class);
+        LoginViewModel loginViewModel = ViewModelProviders.of(this,new LoginViewModelFactory(this,((ComComApplication)getContext().getApplicationContext()).getLoginHandler())).get(LoginViewModel.class);
         view.findViewById(R.id.sign_up).setOnClickListener(v->{
             String name=((TextView)view.findViewById(R.id.full_name)).getText().toString();
             String userId=((TextView)view.findViewById(R.id.user_id)).getText().toString();
@@ -56,12 +56,7 @@ public class LoginFragment extends Fragment implements LoginInterface {
     }
 
     @Override
-    public void onLoggedIn(String token) {
-        if(getContext()!=null &&getContext().getApplicationContext()!=null) {
-            ((ComComApplication) getContext().getApplicationContext()).getLoginHandler().updateLoginToken(token);
-
-        }
-        Log.e("s"," "+token);
+    public void onLoggedIn() {
         if(getActivity()!=null) {
             ((LoginActvity) getActivity()).launchListing();
         }

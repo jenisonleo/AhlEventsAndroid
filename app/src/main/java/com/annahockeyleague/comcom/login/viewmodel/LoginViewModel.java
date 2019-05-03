@@ -23,9 +23,11 @@ public class LoginViewModel extends ViewModel {
     OkHttpClient okhttpClient;
     String dns= ComComApplication.dns;
     private LoginInterface loginInterface;
+    private LoginHandler loginHandler;
 
-    public LoginViewModel(LoginInterface loginInterface) {
+    public LoginViewModel(LoginInterface loginInterface,LoginHandler loginHandler) {
         this.loginInterface = loginInterface;
+        this.loginHandler = loginHandler;
         okhttpClient=new OkHttpClient();
     }
 
@@ -52,8 +54,7 @@ public class LoginViewModel extends ViewModel {
                 Log.e("jenison"," "+s);
                 JsonParser parser=new JsonParser();
                 JsonObject parse = parser.parse(s).getAsJsonObject();
-                String token = parse.get("token").getAsString();
-                loginInterface.onLoggedIn(token);
+                parseResponse(parse);
             }
         });
     }
@@ -68,7 +69,7 @@ public class LoginViewModel extends ViewModel {
         okhttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                e.printStackTrace();
             }
 
             @Override
@@ -77,10 +78,21 @@ public class LoginViewModel extends ViewModel {
                 Log.e("data","v "+s);
                 JsonParser parser=new JsonParser();
                 JsonObject parse = parser.parse(s).getAsJsonObject();
-                String token = parse.get("token").getAsString();
-                Log.e("datda"," "+token);
-                loginInterface.onLoggedIn(token);
+                parseResponse(parse);
             }
         });
+    }
+
+    private void parseResponse(JsonObject parse){
+        String token = parse.get("token").getAsString();
+        String email = parse.get("email").getAsString();
+        String username = parse.get("name").getAsString();
+        boolean isAdmin = parse.get("isAdmin").getAsBoolean();
+        loginHandler.updateLoginToken(token);
+        loginHandler.updateEmail(email);
+        loginHandler.updateUsername(username);
+        loginHandler.updateIsAdmin(isAdmin);
+        Log.e("datda"," "+token+" "+email+" "+username);
+        loginInterface.onLoggedIn();
     }
 }

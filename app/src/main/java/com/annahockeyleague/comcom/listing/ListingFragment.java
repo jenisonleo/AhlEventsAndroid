@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
@@ -55,14 +57,21 @@ public class ListingFragment extends Fragment implements ListingInterface {
                 switch (menuItem.getItemId()){
                     case R.id.action_info:{
                         ((ViewFlipper)view.findViewById(R.id.data_flipper)).setDisplayedChild(0);
-                        Animator anim = ViewAnimationUtils.createCircularReveal(view.findViewById(R.id.data_flipper), view.findViewById(R.id.bottom_navigation).getWidth()/4, view.findViewById(R.id.data_flipper).getHeight(), 0, view.findViewById(R.id.data_flipper).getHeight());
+                        Animator anim = ViewAnimationUtils.createCircularReveal(view.findViewById(R.id.data_flipper), view.findViewById(R.id.bottom_navigation).getWidth()*1/6, view.findViewById(R.id.data_flipper).getHeight(), 0, view.findViewById(R.id.data_flipper).getHeight());
                         anim.setDuration(300);
                         anim.start();
                         break;
                     }
                     case R.id.action_events:{
                         ((ViewFlipper)view.findViewById(R.id.data_flipper)).setDisplayedChild(1);
-                        Animator anim = ViewAnimationUtils.createCircularReveal(view.findViewById(R.id.data_flipper), view.findViewById(R.id.bottom_navigation).getWidth()*3/4, view.findViewById(R.id.data_flipper).getHeight(), 0, view.findViewById(R.id.data_flipper).getHeight());
+                        Animator anim = ViewAnimationUtils.createCircularReveal(view.findViewById(R.id.data_flipper), view.findViewById(R.id.bottom_navigation).getWidth()*3/6, view.findViewById(R.id.data_flipper).getHeight(), 0, view.findViewById(R.id.data_flipper).getHeight());
+                        anim.setDuration(300);
+                        anim.start();
+                        break;
+                    }
+                    case R.id.action_profile:{
+                        ((ViewFlipper)view.findViewById(R.id.data_flipper)).setDisplayedChild(2);
+                        Animator anim = ViewAnimationUtils.createCircularReveal(view.findViewById(R.id.data_flipper), view.findViewById(R.id.bottom_navigation).getWidth()*5/6, view.findViewById(R.id.data_flipper).getHeight(), 0, view.findViewById(R.id.data_flipper).getHeight());
                         anim.setDuration(300);
                         anim.start();
                         break;
@@ -73,6 +82,14 @@ public class ListingFragment extends Fragment implements ListingInterface {
                 return true;
             }
         });
+        view.findViewById(R.id.sign_out).setOnClickListener(v->{
+            if(getContext()!=null &&getContext().getApplicationContext()!=null && getActivity()!=null) {
+                ((ComComApplication) getContext().getApplicationContext()).getLoginHandler().logoutAction();
+                Intent intent=new Intent(getContext(), LoginActvity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
         InfoAdapter infoAdapter=new InfoAdapter();
         ((RecyclerView)view.findViewById(R.id.info_recyclerview)).setLayoutManager(new LinearLayoutManager(getContext()));
         ((RecyclerView)view.findViewById(R.id.info_recyclerview)).setAdapter(infoAdapter);
@@ -81,10 +98,16 @@ public class ListingFragment extends Fragment implements ListingInterface {
         ((RecyclerView)view.findViewById(R.id.event_recyclerview)).setAdapter(eventsAdapter);
         if(((BottomNavigationView)view.findViewById(R.id.bottom_navigation)).getSelectedItemId()==R.id.action_info){
             ((ViewFlipper)view.findViewById(R.id.data_flipper)).setDisplayedChild(0);
-        }else {
+        }else if(((BottomNavigationView)view.findViewById(R.id.bottom_navigation)).getSelectedItemId()==R.id.action_events) {
             ((ViewFlipper)view.findViewById(R.id.data_flipper)).setDisplayedChild(1);
+        }else {
+            ((ViewFlipper)view.findViewById(R.id.data_flipper)).setDisplayedChild(2);
         }
-
+        ((TextView)view.findViewById(R.id.user_name_holder)).setText(((ComComApplication) getContext().getApplicationContext()).getLoginHandler().getUserName());
+        ((TextView)view.findViewById(R.id.email_holder)).setText(((ComComApplication) getContext().getApplicationContext()).getLoginHandler().getEmailId());
+        if(((ComComApplication) getContext().getApplicationContext()).getLoginHandler().isAdmin()){
+            view.findViewById(R.id.admin_console).setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -97,15 +120,7 @@ public class ListingFragment extends Fragment implements ListingInterface {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.search:{
-                break;
-            }
-            case R.id.logout:{
-                if(getContext()!=null &&getContext().getApplicationContext()!=null && getActivity()!=null) {
-                    ((ComComApplication) getContext().getApplicationContext()).getLoginHandler().updateLoginToken(null);
-                    Intent intent=new Intent(getContext(), LoginActvity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                }
+                Toast.makeText(getContext(),"Coming Soon",Toast.LENGTH_LONG).show();
                 break;
             }
             default:

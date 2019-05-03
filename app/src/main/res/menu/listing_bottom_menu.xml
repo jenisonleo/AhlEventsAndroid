@@ -6,4 +6,7 @@
     <item android:id="@+id/action_events"
         android:title="Events"
         android:icon="@drawable/ic_round_event_24px" />
+    <item android:id="@+id/action_profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_round_account_box_24px"/>
 </menu>
