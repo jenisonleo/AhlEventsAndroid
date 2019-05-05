@@ -45,16 +45,24 @@ public class LoginViewModel extends ViewModel {
         okhttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
+                loginInterface.registrationError(e.getMessage());
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String s=new String(response.body().bytes());
-                Log.e("jenison"," "+s);
                 JsonParser parser=new JsonParser();
-                JsonObject parse = parser.parse(s).getAsJsonObject();
-                parseResponse(parse);
+                try {
+                    JsonObject parse = parser.parse(s).getAsJsonObject();
+                    if(parse.has("token")){
+                        parseResponse(parse);
+                        loginInterface.onRegistered();
+                    }else {
+                        loginInterface.registrationError(s);
+                    }
+                }catch (Exception e){
+                    loginInterface.registrationError(s);
+                }
             }
         });
     }
@@ -69,21 +77,29 @@ public class LoginViewModel extends ViewModel {
         okhttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
+                loginInterface.loginError(e.getMessage());
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String s=new String(response.body().bytes());
-                Log.e("data","v "+s);
                 JsonParser parser=new JsonParser();
-                JsonObject parse = parser.parse(s).getAsJsonObject();
-                parseResponse(parse);
+                try {
+                    JsonObject parse = parser.parse(s).getAsJsonObject();
+                    if(parse.has("token")){
+                        parseResponse(parse);
+                        loginInterface.onLoggedIn();
+                    }else {
+                        loginInterface.loginError(s);
+                    }
+                }catch (Exception e){
+                    loginInterface.loginError(s);
+                }
             }
         });
     }
 
-    private void parseResponse(JsonObject parse){
+    private void parseResponse(JsonObject parse) throws Exception{
         String token = parse.get("token").getAsString();
         String email = parse.get("email").getAsString();
         String username = parse.get("name").getAsString();
@@ -92,7 +108,5 @@ public class LoginViewModel extends ViewModel {
         loginHandler.updateEmail(email);
         loginHandler.updateUsername(username);
         loginHandler.updateIsAdmin(isAdmin);
-        Log.e("datda"," "+token+" "+email+" "+username);
-        loginInterface.onLoggedIn();
     }
 }

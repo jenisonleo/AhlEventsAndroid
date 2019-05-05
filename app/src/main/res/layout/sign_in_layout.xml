@@ -65,13 +65,16 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.google.android.material.button.MaterialButton
+        <com.dx.dxloadingbutton.lib.LoadingButton
             android:id="@+id/sign_in"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
             android:padding="10dp"
-            android:text="Sign In"
+            app:lb_btnText="SIGN IN"
+            app:lb_resetAfterFailed="true"
+            app:lb_cornerRadius="25"
+            app:lb_btnColor="@color/colorAccent"
             app:layout_constraintBottom_toTopOf="@id/sign_up_viewflipper"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

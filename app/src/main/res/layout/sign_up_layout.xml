@@ -91,13 +91,16 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.google.android.material.button.MaterialButton
+        <com.dx.dxloadingbutton.lib.LoadingButton
             android:id="@+id/sign_up"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
             android:padding="10dp"
-            android:text="Sign Up"
+            app:lb_btnText="SIGN UP"
+            app:lb_resetAfterFailed="true"
+            app:lb_cornerRadius="25"
+            app:lb_btnColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/password_holder" />

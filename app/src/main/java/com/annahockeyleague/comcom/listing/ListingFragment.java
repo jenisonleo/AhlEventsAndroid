@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.annahockeyleague.comcom.ComComApplication;
 import com.annahockeyleague.comcom.R;
+import com.annahockeyleague.comcom.admin.AdminConsoleFragment;
 import com.annahockeyleague.comcom.listing.viewmodel.ListingInterface;
 import com.annahockeyleague.comcom.listing.viewmodel.ListingViewModel;
 import com.annahockeyleague.comcom.listing.viewmodel.ListingViewModelFactory;
@@ -108,6 +109,10 @@ public class ListingFragment extends Fragment implements ListingInterface {
         if(((ComComApplication) getContext().getApplicationContext()).getLoginHandler().isAdmin()){
             view.findViewById(R.id.admin_console).setVisibility(View.VISIBLE);
         }
+        view.findViewById(R.id.admin_console).setOnClickListener(v->{
+            AdminConsoleFragment adminConsoleFragment=new AdminConsoleFragment();
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,adminConsoleFragment,AdminConsoleFragment.adminConsoleFragment).commit();
+        });
     }
 
     @Override

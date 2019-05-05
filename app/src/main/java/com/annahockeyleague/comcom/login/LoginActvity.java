@@ -2,13 +2,13 @@ package com.annahockeyleague.comcom.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.annahockeyleague.comcom.ComComApplication;
 import com.annahockeyleague.comcom.R;
 import com.annahockeyleague.comcom.listing.ListingActivity;
+import com.annahockeyleague.comcom.utils.BackPressListener;
 
 public class LoginActvity extends AppCompatActivity {
 
@@ -28,6 +28,15 @@ public class LoginActvity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        if(getSupportFragmentManager().findFragmentByTag(LoginFragment.tag)!=null){
+            if(((BackPressListener)getSupportFragmentManager().findFragmentByTag(LoginFragment.tag)).onBackPressed()){
+                return;
+            }
+        }
+            super.onBackPressed();
+    }
 
     public void launchListing(){
         Intent intent=new Intent(this, ListingActivity.class);

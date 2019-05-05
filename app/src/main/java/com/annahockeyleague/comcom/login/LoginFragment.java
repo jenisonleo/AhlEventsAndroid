@@ -1,11 +1,11 @@
 package com.annahockeyleague.comcom.login;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
@@ -15,11 +15,13 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.annahockeyleague.comcom.ComComApplication;
 import com.annahockeyleague.comcom.R;
+import com.annahockeyleague.comcom.utils.BackPressListener;
 import com.annahockeyleague.comcom.login.viewmodel.LoginInterface;
 import com.annahockeyleague.comcom.login.viewmodel.LoginViewModel;
 import com.annahockeyleague.comcom.login.viewmodel.LoginViewModelFactory;
+import com.dx.dxloadingbutton.lib.LoadingButton;
 
-public class LoginFragment extends Fragment implements LoginInterface {
+public class LoginFragment extends Fragment implements LoginInterface, BackPressListener {
 
     public static String tag="LoginFragment";//NO I18N
     @Override
@@ -43,11 +45,13 @@ public class LoginFragment extends Fragment implements LoginInterface {
             String userId=((TextView)view.findViewById(R.id.user_id)).getText().toString();
             String email=((TextView)view.findViewById(R.id.email_id)).getText().toString();
             String password=((TextView)view.findViewById(R.id.password)).getText().toString();
+            ((LoadingButton)v).startLoading();
             loginViewModel.doRegistration(name,userId,email,password);
         });
         view.findViewById(R.id.sign_in).setOnClickListener(v->{
             String username=((TextView)view.findViewById(R.id.login_username)).getText().toString();
             String password=((TextView)view.findViewById(R.id.login_password)).getText().toString();
+            ((LoadingButton)v).startLoading();
             loginViewModel.doLogin(username,password);
         });
         view.findViewById(R.id.sign_up_viewflipper).setOnClickListener(v->{
@@ -57,8 +61,48 @@ public class LoginFragment extends Fragment implements LoginInterface {
 
     @Override
     public void onLoggedIn() {
-        if(getActivity()!=null) {
-            ((LoginActvity) getActivity()).launchListing();
+        getActivity().runOnUiThread(()->{
+            if(getActivity()!=null) {
+                ((LoginActvity) getActivity()).launchListing();
+            }
+        });
+    }
+
+    @Override
+    public void onRegistered() {
+        getActivity().runOnUiThread(()->{
+            if(getActivity()!=null) {
+                ((LoginActvity) getActivity()).launchListing();
+            }
+        });
+    }
+
+    @Override
+    public void registrationError(String message) {
+        getActivity().runOnUiThread(()->{
+            if(getActivity()!=null) {
+                ((LoadingButton)getView().findViewById(R.id.sign_up)).loadingFailed();
+                Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    @Override
+    public void loginError(String message) {
+        getActivity().runOnUiThread(()->{
+            if(getActivity()!=null) {
+                ((LoadingButton)getView().findViewById(R.id.sign_in)).loadingFailed();
+                Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        if(((ViewFlipper)getView().findViewById(R.id.login_flipper)).getDisplayedChild()==1){
+            ((ViewFlipper)getView().findViewById(R.id.login_flipper)).setDisplayedChild(0);
+            return true;
         }
+        return false;
     }
 }

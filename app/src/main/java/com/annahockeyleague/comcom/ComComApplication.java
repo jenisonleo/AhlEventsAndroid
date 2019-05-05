@@ -6,7 +6,7 @@ import com.annahockeyleague.comcom.login.viewmodel.LoginHandler;
 
 public class ComComApplication extends Application {
 
-    public static final String dns="http://172.22.137.124:8002";
+    public static final String dns="http://192.168.0.103:8002";
     private LoginHandler loginHandler;
     @Override
     public void onCreate() {
