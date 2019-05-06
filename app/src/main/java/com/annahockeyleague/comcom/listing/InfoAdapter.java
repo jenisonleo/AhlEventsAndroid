@@ -1,5 +1,6 @@
 package com.annahockeyleague.comcom.listing;
 
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.annahockeyleague.comcom.R;
 import com.google.gson.JsonArray;
 
+import java.util.Random;
+
 
 public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoHolder> {
 
 
     public JsonArray data;
+    private Random random=new Random();
     @NonNull
     @Override
     public InfoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -26,6 +30,7 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull InfoHolder holder, int position) {
+        holder.colorbar.setBackgroundColor(generateRandomColor(random));
         int index = (data.size() - 1) - position;
         String title=data.get(index).getAsJsonObject().get("title").getAsString();
         String description=data.get(index).getAsJsonObject().get("description").getAsString();
@@ -45,11 +50,25 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoHolder> {
     static class InfoHolder extends RecyclerView.ViewHolder{
         TextView titleContainer;
         TextView description_container;
+        View colorbar;
         public InfoHolder(@NonNull View itemView) {
             super(itemView);
             titleContainer=itemView.findViewById(R.id.title_container);
             description_container=itemView.findViewById(R.id.description_container);
-
+            colorbar=itemView.findViewById(R.id.color_bar);
         }
     }
-}
+    public static int generateRandomColor(Random random) {
+        // This is the base color which will be mixed with the generated one
+        final int baseColor = Color.WHITE;
+
+        final int baseRed = Color.red(baseColor);
+        final int baseGreen = Color.green(baseColor);
+        final int baseBlue = Color.blue(baseColor);
+
+        final int red = (baseRed + random.nextInt(256)) / 2;
+        final int green = (baseGreen + random.nextInt(256)) / 2;
+        final int blue = (baseBlue + random.nextInt(256)) / 2;
+
+        return Color.rgb(red, green, blue);
+    }}

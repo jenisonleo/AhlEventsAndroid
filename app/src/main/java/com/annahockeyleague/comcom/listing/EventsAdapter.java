@@ -12,9 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.annahockeyleague.comcom.R;
 import com.google.gson.JsonArray;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Random;
+
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHolder> {
     public JsonArray data;
 
+    private Random random=new Random();
     @NonNull
     @Override
     public EventsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -29,13 +34,19 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
         String title=data.get(index).getAsJsonObject().get("title").getAsString();
         String description=data.get(index).getAsJsonObject().get("description").getAsString();
         String venue=data.get(index).getAsJsonObject().get("place").getAsString();
-        String from=data.get(index).getAsJsonObject().get("fromDate").getAsString();
-        String to=data.get(index).getAsJsonObject().get("toDate").getAsString();
+        long from=data.get(index).getAsJsonObject().get("fromDate").getAsLong();
+        long to=data.get(index).getAsJsonObject().get("toDate").getAsLong();
 
         holder.titleContainer.setText(title);
         holder.description_container.setText(description);
         holder.venue_container.setText(venue);
-        holder.from_container.setText(from+ " to " +to);
+        Timestamp timestamp = new Timestamp(from);
+        Timestamp timestampto = new Timestamp(to);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy' 'HH:mm");
+
+        holder.from_container.setText(simpleDateFormat.format(timestamp)+ " - " +simpleDateFormat.format(timestampto));
+        holder.colorbar.setBackgroundColor(InfoAdapter.generateRandomColor(random));
     }
 
     @Override
@@ -52,6 +63,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
         TextView description_container;
         TextView venue_container;
         TextView from_container;
+        View colorbar;
 
         public EventsHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,6 +71,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
             description_container=itemView.findViewById(R.id.description_container);
             venue_container=itemView.findViewById(R.id.venue_container);
             from_container=itemView.findViewById(R.id.from_container);
+            colorbar=itemView.findViewById(R.id.color_bar);
         }
     }
 }
