@@ -1,8 +1,10 @@
 package com.annahockeyleague.comcom.listing;
 
 import android.animation.Animator;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
+import android.widget.Scroller;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -28,6 +32,8 @@ import com.annahockeyleague.comcom.listing.viewmodel.ListingInterface;
 import com.annahockeyleague.comcom.listing.viewmodel.ListingViewModel;
 import com.annahockeyleague.comcom.listing.viewmodel.ListingViewModelFactory;
 import com.annahockeyleague.comcom.login.LoginActvity;
+import com.google.android.gms.oss.licenses.OssLicensesActivity;
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.JsonArray;
 
@@ -109,9 +115,41 @@ public class ListingFragment extends Fragment implements ListingInterface {
         if(((ComComApplication) getContext().getApplicationContext()).getLoginHandler().isAdmin()){
             view.findViewById(R.id.admin_console).setVisibility(View.VISIBLE);
         }
+        view.findViewById(R.id.pivacy_policy).setOnClickListener(v->{
+            Dialog dialog=new Dialog(getContext());
+            ScrollView scrollView=new ScrollView(getContext());
+            ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            scrollView.setLayoutParams(params);
+            TextView textView=new TextView(getContext());
+            textView.setText(getResources().getString(R.string.privacy_policy));
+            ViewGroup.LayoutParams params1=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            textView.setLayoutParams(params1);
+            scrollView.addView(textView);
+            dialog.setContentView(scrollView);
+            dialog.show();
+        });
+        view.findViewById(R.id.aboutus).setOnClickListener(v->{
+            Dialog dialog=new Dialog(getContext());
+            ScrollView scrollView=new ScrollView(getContext());
+            ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            scrollView.setLayoutParams(params);
+            TextView textView=new TextView(getContext());
+            textView.setText(getResources().getString(R.string.about_us));
+            ViewGroup.LayoutParams params1=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            textView.setLayoutParams(params1);
+            scrollView.addView(textView);
+            dialog.setContentView(scrollView);
+            dialog.show();
+        });
         view.findViewById(R.id.admin_console).setOnClickListener(v->{
             AdminConsoleFragment adminConsoleFragment=new AdminConsoleFragment();
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,adminConsoleFragment,AdminConsoleFragment.adminConsoleFragment).commit();
+        });
+        view.findViewById(R.id.license).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), OssLicensesActivity.class));
+            }
         });
     }
 
@@ -142,6 +180,20 @@ public class ListingFragment extends Fragment implements ListingInterface {
                 getView().findViewById(R.id.event_load).setVisibility(View.GONE);
                 ((EventsAdapter)((RecyclerView) getView().findViewById(R.id.event_recyclerview)).getAdapter()).data=data;
                 ((RecyclerView) getView().findViewById(R.id.event_recyclerview)).getAdapter().notifyDataSetChanged();
+                if(data.size()==0) {
+                    Toast.makeText(getContext(), "No events found", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onEventsFailed(String message) {
+        getActivity().runOnUiThread(() -> {
+            if (getView() != null){
+                getView().findViewById(R.id.event_recyclerview).setVisibility(View.VISIBLE);
+                getView().findViewById(R.id.event_load).setVisibility(View.GONE);
+                Toast.makeText(getContext(),"Events failed to load "+message,Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -154,6 +206,20 @@ public class ListingFragment extends Fragment implements ListingInterface {
                 getView().findViewById(R.id.info_load).setVisibility(View.GONE);
                 ((InfoAdapter)((RecyclerView) getView().findViewById(R.id.info_recyclerview)).getAdapter()).data=data;
                 ((RecyclerView) getView().findViewById(R.id.info_recyclerview)).getAdapter().notifyDataSetChanged();
+                if(data.size()==0) {
+                    Toast.makeText(getContext(), "No info found", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onInfoFailed(String message) {
+        getActivity().runOnUiThread(() -> {
+            if (getView() != null){
+                getView().findViewById(R.id.info_recyclerview).setVisibility(View.VISIBLE);
+                getView().findViewById(R.id.info_load).setVisibility(View.GONE);
+                Toast.makeText(getContext(),"Events failed to load "+message,Toast.LENGTH_LONG).show();
             }
         });
     }

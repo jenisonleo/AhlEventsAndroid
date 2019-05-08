@@ -51,6 +51,7 @@ public class LoginViewModel extends ViewModel {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String s=new String(response.body().bytes());
+                Log.e("data ",""+s);
                 JsonParser parser=new JsonParser();
                 try {
                     JsonObject parse = parser.parse(s).getAsJsonObject();

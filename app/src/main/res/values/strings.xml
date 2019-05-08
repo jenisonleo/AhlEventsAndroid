@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">ComCom</string>
+    <string name="about_us">Comcom enables users to get the recent updates about the Anna Hockey Team\'s news, events and also helps to make decisions easily using polls based functionalities.</string>
+
+    <string name="privacy_policy">ComCom is a communication app available for Android. It is an initiative by Anna hockey team to enable tech into their lives to make life easier. It is used to share information seamlessly among the team players
+
+Respect for your privacy is coded into our DNA. Since we started ComCom, we’ve aspired to build our Services with a set of strong privacy principles in mind.
+
+You provide your email address to create a ComCom account and we are performing end to end encryption on your password, So your informartion will not be accesible by others.
+
+Our app is scanned on a regular basis for security holes and known vulnerabilities in order to make your visit to our app as safe as possible.
+
+We use regular Malware Scanning.
+
+Your personal information is contained behind secured networks and is only accessible by a limited number of persons who have special access rights to such systems, and are required to keep the information confidential. In addition, all sensitive/credit information you supply is encrypted via Secure Socket Layer (SSL) technology.
+
+The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, which is accessible at ComCom unless otherwise defined in this Privacy Policy.</string>
 </resources>

@@ -136,11 +136,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="20dp"
+                android:text="Licenses"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                android:layout_below="@id/aboutus_seperator"
+                android:id="@+id/license"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/license"
+                android:id="@+id/license_seperator"
+                android:background="@android:color/darker_gray"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
                 android:text="Admin Console"
                 android:visibility="invisible"
                 android:textSize="18sp"
                 android:textStyle="italic"
-                android:layout_below="@id/aboutus_seperator"
+                android:layout_below="@id/license_seperator"
                 android:id="@+id/admin_console"/>
             <Button
                 android:layout_width="150dp"

@@ -44,6 +44,7 @@ public class ListingViewModel extends ViewModel {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
+                listingInterface.onEventsFailed(e.getMessage());
             }
 
             @Override
@@ -55,9 +56,12 @@ public class ListingViewModel extends ViewModel {
                     if (parse.isJsonArray()) {
                         JsonArray parser = parse.getAsJsonArray();
                         listingInterface.onEventsLoaded(parser);
+                    }else {
+                        listingInterface.onEventsFailed(s);
                     }
                 }catch (Exception e){
                     e.printStackTrace();
+                    listingInterface.onEventsFailed(s);
                 }
             }
         });
@@ -70,6 +74,7 @@ public class ListingViewModel extends ViewModel {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
+                listingInterface.onInfoFailed(e.getMessage());
             }
 
             @Override
@@ -81,9 +86,12 @@ public class ListingViewModel extends ViewModel {
                     if (parse.isJsonArray()) {
                         JsonArray parser = parse.getAsJsonArray();
                         listingInterface.onInfoloaded(parser);
+                    }else {
+                        listingInterface.onInfoFailed(s);
                     }
                 }catch (Exception e){
                     e.printStackTrace();
+                    listingInterface.onInfoFailed(s);
                 }
             }
         });
