@@ -50,10 +50,14 @@ public class ListingViewModel extends ViewModel {
             public void onResponse(Call call, Response response) throws IOException {
                 String s=new String(response.body().bytes());
                 Log.e("events", " " + s);
-                JsonElement parse = new JsonParser().parse(s);
-                if(parse.isJsonArray()) {
-                    JsonArray parser =parse.getAsJsonArray();
-                    listingInterface.onEventsLoaded(parser);
+                try {
+                    JsonElement parse = new JsonParser().parse(s);
+                    if (parse.isJsonArray()) {
+                        JsonArray parser = parse.getAsJsonArray();
+                        listingInterface.onEventsLoaded(parser);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
             }
         });
@@ -72,10 +76,14 @@ public class ListingViewModel extends ViewModel {
             public void onResponse(Call call, Response response) throws IOException {
                 String s=new String(response.body().bytes());
                 Log.e("jenison1"," "+s);
-                JsonElement parse = new JsonParser().parse(s);
-                if(parse.isJsonArray()) {
-                    JsonArray parser = parse.getAsJsonArray();
-                    listingInterface.onInfoloaded(parser);
+                try {
+                    JsonElement parse = new JsonParser().parse(s);
+                    if (parse.isJsonArray()) {
+                        JsonArray parser = parse.getAsJsonArray();
+                        listingInterface.onInfoloaded(parser);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
             }
         });
