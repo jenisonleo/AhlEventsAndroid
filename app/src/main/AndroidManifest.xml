@@ -5,9 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="false"
-        android:icon="@mipmap/com_com"
+        android:icon="@drawable/hockey_base"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/com_com"
+        android:roundIcon="@drawable/hockey_base"
         android:supportsRtl="true"
         android:name=".ComComApplication"
         android:usesCleartextTraffic="true"

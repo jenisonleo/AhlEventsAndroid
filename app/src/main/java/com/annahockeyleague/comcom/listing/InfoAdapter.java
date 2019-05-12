@@ -11,10 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.annahockeyleague.comcom.R;
+import com.annahockeyleague.comcom.utils.CommonUtils;
 import com.google.gson.JsonArray;
 
-import java.util.Random;
-
+import java.util.*;
+import java.lang.*;
+import java.time.LocalDateTime;
+//import java.io.*;
+import java.text.*;
 
 public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoHolder> {
 
@@ -34,8 +38,13 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoHolder> {
         int index = (data.size() - 1) - position;
         String title=data.get(index).getAsJsonObject().get("title").getAsString();
         String description=data.get(index).getAsJsonObject().get("description").getAsString();
+
+        System.out.println("Expected: "+new CommonUtils().compareDayMonth(data,index));
+        String dateOrTime = new CommonUtils().compareDayMonth(data,index);
+        holder.infodate_container.setText(dateOrTime);
         holder.titleContainer.setText(title);
         holder.description_container.setText(description);
+        //holder.
     }
 
     @Override
@@ -50,12 +59,14 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoHolder> {
     static class InfoHolder extends RecyclerView.ViewHolder{
         TextView titleContainer;
         TextView description_container;
+        TextView infodate_container;
         View colorbar;
         public InfoHolder(@NonNull View itemView) {
             super(itemView);
             titleContainer=itemView.findViewById(R.id.title_container);
             description_container=itemView.findViewById(R.id.description_container);
             colorbar=itemView.findViewById(R.id.color_bar);
+            infodate_container=itemView.findViewById(R.id.infodate_container);
         }
     }
     public static int generateRandomColor(Random random) {
