@@ -18,6 +18,7 @@ import java.util.Random;
 
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHolder> {
     public JsonArray data;
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy' 'HH:mm");
 
     private Random random=new Random();
     @NonNull
@@ -43,7 +44,6 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
         Timestamp timestamp = new Timestamp(from);
         Timestamp timestampto = new Timestamp(to);
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy' 'HH:mm");
 
         holder.from_container.setText(simpleDateFormat.format(timestamp)+ " - " +simpleDateFormat.format(timestampto));
         holder.colorbar.setBackgroundColor(InfoAdapter.generateRandomColor(random));
