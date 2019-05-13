@@ -145,6 +145,7 @@ public class AdminConsoleFragment extends Fragment implements AdminInterface, Ba
                 String fromTime=((TextView)view.findViewById(R.id.from_time_picker)).getText().toString();
                 String toTime=((TextView)view.findViewById(R.id.to_time_picker)).getText().toString();
                 if(l1>0 && l2>0 && l3>0 && fromDate.contains("-") && toDate.contains("-") && fromTime.contains("-") && toTime.contains("-")) {
+                    ((LoadingButton)getView().findViewById(R.id.submit_event)).startLoading();
                     String[] fromdatesplit = fromDate.split("-");
                     String[] fromtimesplit = fromTime.split("-");
                     Calendar from = Calendar.getInstance();

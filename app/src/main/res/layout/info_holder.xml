@@ -10,7 +10,7 @@
     <View
         android:id="@+id/color_bar"
         android:layout_width="2dp"
-        android:background="a"
+        android:background="@android:color/black"
         android:layout_height="match_parent"
         />
     <LinearLayout
