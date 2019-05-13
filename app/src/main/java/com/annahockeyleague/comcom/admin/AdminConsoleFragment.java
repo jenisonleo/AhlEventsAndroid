@@ -154,8 +154,8 @@ public class AdminConsoleFragment extends Fragment implements AdminInterface, Ba
                     Calendar to = Calendar.getInstance();
                     to.set(Integer.parseInt(todatesplit[2]),Integer.parseInt(todatesplit[1]),Integer.parseInt(todatesplit[0]),Integer.parseInt(totimesplit[0]),Integer.parseInt(totimesplit[1]));
                     adminViewModel.addEvent(((EditText)view.findViewById(R.id.event_title_editor)).getText().toString(),
-                            ((EditText)view.findViewById(R.id.event_place_editor)).getText().toString(),
                             ((EditText)view.findViewById(R.id.event_description_editor)).getText().toString(),
+                            ((EditText)view.findViewById(R.id.event_place_editor)).getText().toString(),
                             from.getTimeInMillis(),to.getTimeInMillis());
                 }else {
                     Toast.makeText(getContext(),"Data cannot be empty",Toast.LENGTH_SHORT).show();
