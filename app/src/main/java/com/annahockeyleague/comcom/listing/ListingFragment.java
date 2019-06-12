@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ScrollView;
 import android.widget.Scroller;
 import android.widget.TextView;
@@ -116,17 +117,20 @@ public class ListingFragment extends Fragment implements ListingInterface {
             view.findViewById(R.id.admin_console).setVisibility(View.VISIBLE);
         }
         view.findViewById(R.id.pivacy_policy).setOnClickListener(v->{
-            Dialog dialog=new Dialog(getContext());
-            ScrollView scrollView=new ScrollView(getContext());
-            ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            scrollView.setLayoutParams(params);
-            TextView textView=new TextView(getContext());
-            textView.setText(getResources().getString(R.string.privacy_policy));
-            ViewGroup.LayoutParams params1=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            textView.setLayoutParams(params1);
-            scrollView.addView(textView);
-            dialog.setContentView(scrollView);
-            dialog.show();
+            ((ViewFlipper)view.findViewById(R.id.data_flipper)).setDisplayedChild(3);
+            WebView mWebview = (WebView)view.findViewById(R.id.pivacy_policy_webview);
+            mWebview.loadUrl("https://comcom.flycricket.io/privacy.html");
+//            Dialog dialog=new Dialog(getContext());
+//            ScrollView scrollView=new ScrollView(getContext());
+//            ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//            scrollView.setLayoutParams(params);
+//            TextView textView=new TextView(getContext());
+//            textView.setText(getResources().getString(R.string.privacy_policy));
+//            ViewGroup.LayoutParams params1=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//            textView.setLayoutParams(params1);
+//            scrollView.addView(textView);
+//            dialog.setContentView(scrollView);
+//            dialog.show();
         });
         view.findViewById(R.id.aboutus).setOnClickListener(v->{
             Dialog dialog=new Dialog(getContext());

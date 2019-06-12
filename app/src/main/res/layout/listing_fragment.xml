@@ -167,6 +167,10 @@
                 android:layout_marginBottom="25dp"
                 android:id="@+id/sign_out"/>
         </RelativeLayout>
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/pivacy_policy_webview"/>
     </ViewFlipper>
 
 
