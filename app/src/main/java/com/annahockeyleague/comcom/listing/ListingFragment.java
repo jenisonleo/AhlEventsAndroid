@@ -2,6 +2,8 @@ package com.annahockeyleague.comcom.listing;
 
 import android.animation.Animator;
 import android.app.Dialog;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Layout;
@@ -92,7 +94,10 @@ public class ListingFragment extends Fragment implements ListingInterface {
         });
         view.findViewById(R.id.sign_out).setOnClickListener(v->{
             if(getContext()!=null &&getContext().getApplicationContext()!=null && getActivity()!=null) {
+                NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.cancelAll();
                 ((ComComApplication) getContext().getApplicationContext()).getLoginHandler().logoutAction();
+                ((ComComApplication) getContext().getApplicationContext()).doDegistration();
                 Intent intent=new Intent(getContext(), LoginActvity.class);
                 startActivity(intent);
                 getActivity().finish();

@@ -15,4 +15,6 @@ We use regular Malware Scanning.
 Your personal information is contained behind secured networks and is only accessible by a limited number of persons who have special access rights to such systems, and are required to keep the information confidential. In addition, all sensitive/credit information you supply is encrypted via Secure Socket Layer (SSL) technology.
 
 The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, which is accessible at ComCom unless otherwise defined in this Privacy Policy.</string>
+    <string name="channelname_general">General</string>
+    <string name="channeldescription_general">This category displays the notifications regarding the creation and updation of events and information. </string>
 </resources>

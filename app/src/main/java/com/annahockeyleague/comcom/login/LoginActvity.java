@@ -40,6 +40,7 @@ public class LoginActvity extends AppCompatActivity {
 
     public void launchListing(){
         Intent intent=new Intent(this, ListingActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }

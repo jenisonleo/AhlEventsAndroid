@@ -59,10 +59,16 @@ public class LoginFragment extends Fragment implements LoginInterface, BackPress
         });
     }
 
+
+    private void doNotificationRegistration(){
+        ((ComComApplication)getContext().getApplicationContext()).doNotificationRegistration();
+    }
+
     @Override
     public void onLoggedIn() {
         getActivity().runOnUiThread(()->{
             if(getActivity()!=null) {
+                doNotificationRegistration();
                 ((LoginActvity) getActivity()).launchListing();
             }
         });
@@ -72,6 +78,7 @@ public class LoginFragment extends Fragment implements LoginInterface, BackPress
     public void onRegistered() {
         getActivity().runOnUiThread(()->{
             if(getActivity()!=null) {
+                doNotificationRegistration();
                 ((LoginActvity) getActivity()).launchListing();
             }
         });
