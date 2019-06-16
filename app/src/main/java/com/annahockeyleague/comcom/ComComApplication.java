@@ -18,7 +18,7 @@ import com.google.firebase.iid.InstanceIdResult;
 
 public class ComComApplication extends Application {
 
-    public static final String dns="https://ahlcomcom.herokuapp.com";
+    public static final String dns="https://ahlcomcom1.herokuapp.com";
     private LoginHandler loginHandler;
     private RegistrationHandler registrationHandler;
     @Override
